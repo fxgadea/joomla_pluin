@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.0" type="plugin" group="content"  method="upgrade">
+    <name>OneSignal Plugin</name>
+    <creationDate>Sep 2024</creationDate>
+    <author>Francisco Gadea</author>
+    <authorEmail>fgadea@hotmail.es</authorEmail>
+    <authorUrl>https://www.stereo-romance.com</authorUrl>
+    <copyright>Copyright (C) 2024. All rights reserved.</copyright>
+    <license>MIT License; see LICENSE</license>
+    <version>1.0</version>
+    <description>PLG_CONTENT_ONESIGNALPLUGIN_DESCRIPTION</description>
+    <namespace path="src">Joomla\Plugin\Content\onesignalplugin</namespace>
+
+    <files>
+        <filename plugin="onesignalplugin">onesignalplugin.php</filename>
+        <filename>css/onesignal.css</filename>
+        <filename>js/onesignal.js</filename>
+        <filename>language/en-GB/en-GB.plg_content_onesignalplugin.ini</filename>
+        <filename>language/es-ES/es-ES.plg_content_onesignalplugin.ini</filename>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_content_onesignalplugin.ini</language>
+        <language tag="es-ES">language/es-ES/es-ES.plg_content_onesignalplugin.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset name="OneSignal" label="PLG_CONTENT_ONESIGNALPLUGIN_ONESIGNAL_APP_ID" description="Configuración de la aplicación OneSignal">
+                <field name="oneSignalAppId" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_ONESIGNAL_APP_ID_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_ONESIGNAL_APP_ID" />
+                <field name="oneSignalRestKey" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_ONESIGNAL_REST_KEY_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_ONESIGNAL_REST_KEY" />
+            </fieldset>
+
+            <fieldset name="Datasource" label="PLG_CONTENT_ONESIGNALPLUGIN_SELECT_CATEGORY" description="Selección de categorías y artículos destacados">
+                <field name="categories" type="category" multiple="1" extension="com_content" label="PLG_CONTENT_ONESIGNALPLUGIN_SELECT_CATEGORY" description="PLG_CONTENT_ONESIGNALPLUGIN_SELECT_CATEGORY_DESC" />
+                <field name="featured" type="radio" label="PLG_CONTENT_ONESIGNALPLUGIN_ONLY_FEATURED_ARTICLES" description="PLG_CONTENT_ONESIGNALPLUGIN_ONLY_FEATURED_ARTICLES_DESC" default="1">
+                    <option value="1">PLG_CONTENT_ONESIGNALPLUGIN_YES</option>
+                    <option value="0">PLG_CONTENT_ONESIGNALPLUGIN_NO</option>
+                </field>
+            </fieldset>
+
+            <!-- Campos anidados para organizar mejor las opciones de una manera mas logica, <fieldset> anidados es una buena manera de lograrlo-->
+            <fieldset name="Opciones" label="PLG_CONTENT_ONESIGNALPLUGIN_MESA_TITLE" description="Configuración de opciones para el plugin OneSignal">
+                
+                <fieldset name="Titulo" label="Configuración del Título">
+                    <field name="Mesa_Title" type="radio" label="PLG_CONTENT_ONESIGNALPLUGIN_MESA_TITLE" description="PLG_CONTENT_ONESIGNALPLUGIN_MESA_TITLE_DESC" default="0">
+                        <option value="0">Normal</option>
+                        <option value="1">Category</option>
+                        <option value="2">Prefijo + Category</option>
+                    </field>
+                    <field name="PrefijoTitle" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_PREFIX_TITLE_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_PREFIX_TITLE" default="Noticias de:" showon="Mesa_Title:2"/>
+                    <field name="messageTitle" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_MESSAGE_TITLE_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_MESSAGE_TITLE" default="New article" showon="Mesa_Title:0"/>
+                </fieldset>
+
+                <fieldset name="General" label="Configuración General">
+                    <field name="language" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_LANGUAGE_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_LANGUAGE" default="en" />
+                    <field name="segments" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_SEGMENTS_DESC" default="Subscribed Users" label="PLG_CONTENT_ONESIGNALPLUGIN_SEGMENTS" />
+                    <field name="Images" type="radio" label="PLG_CONTENT_ONESIGNALPLUGIN_SHOW_IMAGES" description="PLG_CONTENT_ONESIGNALPLUGIN_SHOW_IMAGES_DESC" default="1">
+                        <option value="1">PLG_CONTENT_ONESIGNALPLUGIN_YES</option>
+                        <option value="0">PLG_CONTENT_ONESIGNALPLUGIN_NO</option>
+                    </field>
+                </fieldset>
+
+                <!--Determina si el mensaje es para todos, modo normal, o para el segmento de prueba definido en OneSignal-->
+                <fieldset name="Segmento de Prueba" label="Configuración del Segmento de Prueba">
+                    <field name="Test_segment" type="radio" label="PLG_CONTENT_ONESIGNALPLUGIN_BROADCAST_ONLY_TEST_SEGMENT" description="PLG_CONTENT_ONESIGNALPLUGIN_BROADCAST_ONLY_TEST_SEGMENT_DESC" default="0">
+                        <option value="1">PLG_CONTENT_ONESIGNALPLUGIN_YES</option>
+                        <option value="0">PLG_CONTENT_ONESIGNALPLUGIN_NO</option>
+                    </field>
+                    <!-- field condicional dependiendo del valor de testsegment, Contiene el segmento de prueba definido en OneSignal-->
+                    <field name="testsegments" type="text" description="PLG_CONTENT_ONESIGNALPLUGIN_BROADCAST_TEST_SEGMENT_DESC" label="PLG_CONTENT_ONESIGNALPLUGIN_BROADCAST_TEST_SEGMENT" showon="Test_segment:1"/>
+                </fieldset>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

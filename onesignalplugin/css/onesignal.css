@@ -1,0 +1,4 @@
+.inline-field {
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre los campos */
+}
